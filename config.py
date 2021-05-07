@@ -121,7 +121,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='sans',
+    font='Ubuntu Bold',
     fontsize=13,
     padding=3,
 )
@@ -131,13 +131,13 @@ screens = [
     Screen( # THIS IS THE RIGHT MONITOR
         top=bar.Bar(
             [
-                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['000000', 'ff7400']),
+                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
                 widget.Prompt(),
                 widget.CurrentLayout(),
-                widget.Sep(linewidth=610, background='192430', foreground='192430'),
-                widget.Sep(linewidth=20, background='192430', foreground='192430'),
-                widget.Sep(linewidth=15, background='192430', foreground='192430'),
-                widget.Sep(linewidth=20, background='192430', foreground='192430'),
+                widget.Sep(linewidth=710, background='111212', foreground='111212'),
+                widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                widget.Sep(linewidth=15, background='111212', foreground='111212'),
+                widget.Sep(linewidth=20, background='111212', foreground='111212'),
                 widget.Chord(
                     chords_colors={
                         'launch': ("#ff0000", "#ffffff"),
@@ -147,30 +147,30 @@ screens = [
                 # widget.TextBox("default config", name="default"),
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
-                widget.Sep(linewidth=4, background='192430', foreground='192430'),
-                widget.CapsNumLockIndicator(background='192430'),
+                widget.Sep(linewidth=4, background='111212', foreground='111212'),
+                widget.CapsNumLockIndicator(background='111212'),
                 widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                widget.Sep(linewidth=10, background='192430', foreground='192430'), 
+                widget.Sep(linewidth=10, background='111212', foreground='111212'), 
                 widget.TextBox(fmt='|   SSD: ', foreground='4e92d0'),
                 widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
                 widget.Memory(fmt='[{}]', foreground='c55050'),
                 widget.CPU(fmt='[{}]', foreground='ccbb5a'),
             ],
             24,
-            opacity = 0.65,
-            background='192430',
+            opacity = 1.00,
+            background='111212',
         ),
     ), 
     Screen( # THIS IS THE MIDDLE MONITOR
         top=bar.Bar(
             [
-                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['000000', 'ff7400']),
+                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
                 widget.Prompt(),
                 widget.CurrentLayout(),
-                widget.Sep(linewidth=630, background='192430', foreground='192430'),
-                widget.Sep(linewidth=20, background='192430', foreground='192430'),
-                widget.Sep(linewidth=15, background='192430', foreground='192430'),
-                widget.Sep(linewidth=20, background='192430', foreground='192430'),
+                widget.Sep(linewidth=720, background='111212', foreground='111212'),
+                widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                widget.Sep(linewidth=15, background='111212', foreground='111212'),
+                widget.Sep(linewidth=20, background='111212', foreground='111212'),
                 widget.Chord(
                     chords_colors={
                         'launch': ("#ff0000", "#ffffff"),
@@ -180,10 +180,10 @@ screens = [
                 # widget.TextBox("default config", name="default"),
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
-                widget.Sep(linewidth=4, background='192430', foreground='192430'),
-                widget.CapsNumLockIndicator(background='192430'),
+                widget.Sep(linewidth=4, background='111212', foreground='111212'),
+                widget.CapsNumLockIndicator(background='111212'),
                 widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                widget.Sep(linewidth=10, background='192430', foreground='192430'), 
+                widget.Sep(linewidth=10, background='111212', foreground='111212'), 
                 widget.TextBox(fmt='|   SSD: ', foreground='4e92d0'),
                 widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
                 widget.Memory(fmt='[{}]', foreground='c55050'),
@@ -191,20 +191,20 @@ screens = [
 
             ],
             24,
-            opacity = 0.65,
-            background='192430',
+            opacity = 1.00,
+            background='111212',
         ),
     ), 
      Screen( # THIS IS THE LEFT MONITOR
             top=bar.Bar(
                 [
-                    widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['000000', 'ff7400']),
+                    widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
                     widget.Prompt(),
                     widget.CurrentLayout(),
-                    widget.Sep(linewidth=630, background='192430', foreground='192430'),
-                    widget.Sep(linewidth=20, background='192430', foreground='192430'),
-                    widget.Sep(linewidth=15, background='192430', foreground='192430'),
-                    widget.Sep(linewidth=20, background='192430', foreground='192430'),
+                    widget.Sep(linewidth=720, background='111212', foreground='111212'),
+                    widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                    widget.Sep(linewidth=15, background='111212', foreground='111212'),
+                    widget.Sep(linewidth=20, background='111212', foreground='111212'),
                     widget.Chord(
                         chords_colors={
                             'launch': ("#ff0000", "#ffffff"),
@@ -214,18 +214,18 @@ screens = [
                     # widget.TextBox("default config", name="default"),
                     # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                     widget.Systray(),
-                    widget.Sep(linewidth=4, background='192430', foreground='192430'),
-                    widget.CapsNumLockIndicator(background='192430'),
+                    widget.Sep(linewidth=4, background='111212', foreground='111212'),
+                    widget.CapsNumLockIndicator(background='111212'),
                     widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                    widget.Sep(linewidth=10, background='192430', foreground='192430'), 
+                    widget.Sep(linewidth=10, background='111212', foreground='111212'), 
                     widget.TextBox(fmt='|   SSD: ', foreground='4e92d0'),
                     widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
                     widget.Memory(fmt='[{}]', foreground='c55050'),
                     widget.CPU(fmt='[{}]', foreground='ccbb5a'),
                 ],
                 24,
-                opacity = 0.65,
-                background='192430',
+                opacity = 1.00,
+                background='111212',
             ),
         ),
 ]
