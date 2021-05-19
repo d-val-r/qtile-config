@@ -84,7 +84,7 @@ keys = [
 
 # groups = [Group(i) for i in "123456789"]
 
-groups = [Group(i) for i in ["WEB", "WRITE", "DEV", "FILE", "DISC", "MATH", "DESK", "MEDI"]]
+groups = [Group(i) for i in ["WEB", "WRITE", "DEV", "FILE", "DISC", "MATH", "DESK", "MAIL"]]
 letters = "asdfuiop"
 j = 0
 for i in groups:
@@ -127,121 +127,108 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+def init_bar():
+    return bar.Bar(
+                    [
+                        widget.Image(filename="~/Pictures/qtile_icons/python_logo.png", margin_x=5),
+                        widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
+                        widget.Prompt(),
+                        widget.CurrentLayout(),
+                        widget.Sep(linewidth=480, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=15, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                        widget.Chord(
+                            chords_colors={
+                                'launch': ("#ff0000", "#ffffff"),
+                            },
+                            name_transform=lambda name: name.upper(),
+                        ),
+                        # widget.TextBox("default config", name="default"),
+                        # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/cal_icon.png", margin_x=5),
+                        widget.Clock(format=' %Y-%m-%d %a %I:%M %p '),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),                    
+                        widget.Sep(linewidth=2, background='111212', foreground='111212'), 
+                        widget.Image(filename="~/Pictures/qtile_icons/ssd_icon.png", margin_x=5),
+                        widget.HDDBusyGraph(border_color='62E9E1', graph_color='62E9E1'),
+                        widget.Image(filename="~/Pictures/qtile_icons/hdd_icon.png", margin_x=5),
+                        widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdb"),
+                        widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdc"),
+                        widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/ram_icon.png", margin_x=5),
+                        widget.Memory(fmt='{}', foreground='c55050'),
+                        widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/cpu_icon.png", margin_x=5),
+                        widget.CPU(fmt='{}', foreground='EB9B30'),
+                    ],
+                    24,
+                    opacity = 1.00,
+                    background='111212',
+                )
+
+def init_bar_systray():
+    return bar.Bar(
+                    [
+                        widget.Image(filename="~/Pictures/qtile_icons/python_logo.png", margin_x=5),
+                        widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
+                        widget.Prompt(),
+                        widget.CurrentLayout(),
+                        widget.Sep(linewidth=470, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=15, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=20, background='111212', foreground='111212'),
+                        widget.Chord(
+                            chords_colors={
+                                'launch': ("#ff0000", "#ffffff"),
+                            },
+                            name_transform=lambda name: name.upper(),
+                        ),
+                        # widget.TextBox("default config", name="default"),
+                        # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                        widget.Systray(),
+                        widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/cal_icon.png", margin_x=5),
+                        widget.Clock(format=' %Y-%m-%d %a %I:%M %p '),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),                    
+                        widget.Sep(linewidth=2, background='111212', foreground='111212'), 
+                        widget.Image(filename="~/Pictures/qtile_icons/ssd_icon.png", margin_x=5),
+                        widget.HDDBusyGraph(border_color='62E9E1', graph_color='62E9E1'),
+                        widget.Image(filename="~/Pictures/qtile_icons/hdd_icon.png", margin_x=5),
+                        widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdb"),
+                        widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdc"),
+                        widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/ram_icon.png", margin_x=5),
+                        widget.Memory(fmt='{}', foreground='c55050'),
+                        widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
+                        widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
+                        widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
+                        widget.Image(filename="~/Pictures/qtile_icons/cpu_icon.png", margin_x=5),
+                        widget.CPU(fmt='{}', foreground='EB9B30'),
+                    ],
+                    24,
+                    opacity = 1.00,
+                    background='111212',
+                )
+
+
 screens = [
     Screen( # THIS IS THE RIGHT MONITOR
-        top=bar.Bar(
-            [
-                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
-                widget.Prompt(),
-                widget.CurrentLayout(),
-                widget.Sep(linewidth=410, background='111212', foreground='111212'),
-                widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                widget.Sep(linewidth=15, background='111212', foreground='111212'),
-                widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # widget.TextBox("default config", name="default"),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Sep(linewidth=4, background='111212', foreground='111212'),
-                widget.CapsNumLockIndicator(background='111212'),
-                widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                widget.Sep(linewidth=10, background='111212', foreground='111212'), 
-                widget.TextBox(fmt='[   SDA: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
-                widget.TextBox(fmt='   SDB: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdb"),
-                widget.TextBox(fmt='   SDC: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdc"),
-                widget.TextBox(fmt='] ', foreground='4e92d0'),
-                widget.Memory(fmt='[{}]', foreground='c55050'),
-                widget.CPU(fmt='[{}]', foreground='ccbb5a'),
-            ],
-            24,
-            opacity = 1.00,
-            background='111212',
-        ),
+        top=init_bar_systray(),
     ), 
     Screen( # THIS IS THE MIDDLE MONITOR
-        top=bar.Bar(
-            [
-                widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
-                widget.Prompt(),
-                widget.CurrentLayout(),
-                widget.Sep(linewidth=420, background='111212', foreground='111212'),
-                widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                widget.Sep(linewidth=15, background='111212', foreground='111212'),
-                widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # widget.TextBox("default config", name="default"),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Sep(linewidth=4, background='111212', foreground='111212'),
-                widget.CapsNumLockIndicator(background='111212'),
-                widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                widget.Sep(linewidth=10, background='111212', foreground='111212'), 
-                widget.TextBox(fmt='[   SDA: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
-                widget.TextBox(fmt='   SDB: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdb"),
-                widget.TextBox(fmt='   SDC: ', foreground='4e92d0'),
-                widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdc"),
-                widget.TextBox(fmt=']', foreground='4e92d0'),
-                widget.Memory(fmt='[{}]', foreground='c55050'),
-                widget.CPU(fmt='[{}]', foreground='ccbb5a'),
-
-            ],
-            24,
-            opacity = 1.00,
-            background='111212',
-        ),
+        top=init_bar(),
     ), 
      Screen( # THIS IS THE LEFT MONITOR
-            top=bar.Bar(
-                [
-                    widget.GroupBox(inactive='ffffff', highlight_method="line", highlight_color=['a2a0bf', 'a2a0bf']),
-                    widget.Prompt(),
-                    widget.CurrentLayout(),
-                    widget.Sep(linewidth=420, background='111212', foreground='111212'),
-                    widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                    widget.Sep(linewidth=15, background='111212', foreground='111212'),
-                    widget.Sep(linewidth=20, background='111212', foreground='111212'),
-                    widget.Chord(
-                        chords_colors={
-                            'launch': ("#ff0000", "#ffffff"),
-                        },
-                        name_transform=lambda name: name.upper(),
-                    ),
-                    # widget.TextBox("default config", name="default"),
-                    # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                    widget.Systray(),
-                    widget.Sep(linewidth=4, background='111212', foreground='111212'),
-                    widget.CapsNumLockIndicator(background='111212'),
-                    widget.Clock(format='[ %Y-%m-%d %a %I:%M %p ]'),
-                    widget.Sep(linewidth=10, background='111212', foreground='111212'), 
-                    widget.TextBox(fmt='[   SDA: ', foreground='4e92d0'),
-                    widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0'),
-                    widget.TextBox(fmt='   SDB: ', foreground='4e92d0'),
-                    widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdb"),
-                    widget.TextBox(fmt='   SDC: ', foreground='4e92d0'),
-                    widget.HDDBusyGraph(border_color='4e92d0', graph_color='4e92d0', device="sdc"),
-                    widget.TextBox(fmt=']', foreground='4e92d0'),
-                    widget.Memory(fmt='[{}]', foreground='c55050'),
-                    widget.CPU(fmt='[{}]', foreground='ccbb5a'),
-                ],
-                24,
-                opacity = 1.00,
-                background='111212',
-            ),
+            top=init_bar(),
         ),
 ]
 
