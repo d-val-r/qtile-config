@@ -36,6 +36,7 @@ import subprocess as sp
 mod = "mod4"
 terminal = "alacritty"
 browser = "brave"
+mail = "thunderbird"
 
 keys = [
     # Switch between windows
@@ -89,6 +90,7 @@ keys = [
     Key([mod], "b", lazy.spawn(browser), desc="Launch default browser"),
     Key([mod, "shift"], "space", lazy.spawn("libreoffice"), desc="Launch LibreOffice"),
     Key([mod, "control"], "u", lazy.spawn("discord"), desc="Launch Discord"),
+    Key([mod], "t", lazy.spawn(mail), desc="Launch mail client"),
 ]
 
 # groups = [Group(i) for i in "123456789"]
@@ -114,7 +116,7 @@ for i in groups:
 
 layouts = [
     # layout.Columns(border_focus_stack='#d75f5f'),
-    layout.MonadTall(border_focus='ffffff', border_width=0),
+    layout.MonadTall(border_focus='DE781F', border_width=1),
     layout.Max(),
     layout.Floating()
     # Try more layouts by unleashing below layouts.
@@ -131,21 +133,17 @@ layouts = [
 
 widget_defaults = dict(
     font='Ubuntu Bold',
-    fontsize=13,
+    fontsize=10,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
 
-# issue a Bash command to read disk usage and return results in gigabytes
+
 command_output = sp.Popen(['df', '-h'], stdout=sp.PIPE, stderr=sp.STDOUT)
 output, error = command_output.communicate()
-
-# the result needs to be decoded; it will be several lines of output,
-# so split it into more manageable parts
 decoded_output = output.decode().split("\n")
 
-# my machine has three drives
 sda_usage = 0
 sda_max = 0
 
@@ -154,9 +152,6 @@ sdb_max = 0
 
 sdc_usage = 0
 sdc_max = 0
-
-# use regular expression matching to find storage capacity and number of
-# GB already used for each drive
 
 for line in decoded_output:
     if (re.search("sda3", line)):
@@ -169,33 +164,27 @@ for line in decoded_output:
         sdc_max = re.findall("([0-9]*)G", line)[0]
         sdc_usage = re.findall("([0-9]*)G", line)[1]
 
-# this output will be written directly to the Qtile bar
+
 sda_output = f"{sda_usage}/{sda_max} G"
 sdb_output = f"{sdb_usage}/{sdb_max} G"
 sdc_output = f"{sdc_usage}/{sdc_max} G"
 
 
-# like the above, issues a Bash command to the operating system, but
-# this time, to get current kernel version
 command_output = sp.Popen(['uname', '-srm'], stdout=sp.PIPE, stderr=sp.STDOUT)
 output, error = command_output.communicate()
 decoded_output = output.decode().split()
-
-# the output of 'uname -srm' will be 'Linux kernel_version x86_64'
-# this gets only the kernel_version portion of the output
 kernel = decoded_output[1]
 
 def init_bar():
 
-    # all images purely cosmetic and are spaced to coincide with segments
-    # of the bar
+
     return bar.Bar(
                     [
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/python_logo.png", margin_x=5),
                         widget.GroupBox(inactive='ffffff', highlight_method="block", this_current_screen_border='A93500', this_screen_border='A93500'),
                         widget.Prompt(),
                         widget.CurrentLayout(),
-                        widget.Sep(linewidth=470, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=670, background='111212', foreground='111212'),
                         widget.Sep(linewidth=20, background='111212', foreground='111212'),
                         widget.Sep(linewidth=15, background='111212', foreground='111212'),
                         widget.Sep(linewidth=20, background='111212', foreground='111212'),
@@ -205,31 +194,33 @@ def init_bar():
                             },
                             name_transform=lambda name: name.upper(),
                         ),
+                        # widget.TextBox("default config", name="default"),
+                        # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/linux_logo.png", margin_x=5),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
                         widget.TextBox(fmt=kernel, foreground="ffffff"),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/cal_icon.png", margin_x=5),
                         widget.Clock(format=' %Y-%m-%d %a %I:%M %p '),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),                    
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/ssd_icon.png", margin_x=5),
                         widget.TextBox(fmt=sda_output, foreground='62E9E1'),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/hdd_icon.png", margin_x=5),
                         widget.TextBox(fmt=sdb_output, foreground='4e92d0'),
                         widget.TextBox(fmt=sdc_output, foreground='4e92d0'),
                         widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/ram_icon.png", margin_x=5),
                         widget.Memory(fmt='{}', foreground='c55050'),
                         widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/cpu_icon.png", margin_x=5),
                         widget.CPU(fmt='{}', foreground='EB9B30'),
                     ],
                     24,
@@ -240,11 +231,11 @@ def init_bar():
 def init_bar_systray():
     return bar.Bar(
                     [
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/python_logo.png", margin_x=5),
                         widget.GroupBox(inactive='ffffff', highlight_method="block", this_current_screen_border='A93500', this_screen_border='A93500'),
                         widget.Prompt(),
                         widget.CurrentLayout(),
-                        widget.Sep(linewidth=450, background='111212', foreground='111212'),
+                        widget.Sep(linewidth=650, background='111212', foreground='111212'),
                         widget.Sep(linewidth=20, background='111212', foreground='111212'),
                         widget.Sep(linewidth=15, background='111212', foreground='111212'),
                         widget.Sep(linewidth=20, background='111212', foreground='111212'),
@@ -258,30 +249,30 @@ def init_bar_systray():
                         # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                         widget.Systray(),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/linux_logo.png", margin_x=5),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
                         widget.TextBox(fmt=kernel, foreground="ffffff"),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/cal_icon.png", margin_x=5),
                         widget.Clock(format=' %Y-%m-%d %a %I:%M %p '),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),                    
                         widget.Sep(linewidth=2, background='111212', foreground='111212'), 
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/ssd_icon.png", margin_x=5),
                         widget.TextBox(fmt=sda_output, foreground='62E9E1'),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/hdd_icon.png", margin_x=5),
                         widget.TextBox(fmt=sdb_output, foreground='4e92d0'),
                         widget.TextBox(fmt=sdc_output, foreground='4e92d0'),
                         widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/ram_icon.png", margin_x=5),
                         widget.Memory(fmt='{}', foreground='c55050'),
                         widget.Sep(linewidth=10, background='111212', foreground='111212', padding=1),
                         widget.Sep(linewidth=0, background='8A8A8B', foreground='8A8A8B', padding=1),
                         widget.Sep(linewidth=2, background='111212', foreground='111212', padding=1),
-                        widget.Image(filename="your path here", margin_x=5),
+                        widget.Image(filename="~/Pictures/qtile_icons/cpu_icon.png", margin_x=5),
                         widget.CPU(fmt='{}', foreground='EB9B30'),
                     ],
                     24,
